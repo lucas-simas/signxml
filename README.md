@@ -31,33 +31,36 @@ Por padrão este container será criado no localhost com a porta definida para 6
 Ele funciona como uma API que aceita POSTs
 Você deve enviar da seguinte forma, exemplo:
 ```
+<?php
+header('Content-Type: text/html; charset=UTF-8');
+
 //Inicializando o CURL
-	$curl = curl_init('http://localhost:6025/xml/assinar');
+$curl = curl_init('http://localhost:6025/xml/assinar');
 
-	//Transformando o arquivo em algo enviavel pelo CURL
-	if (function_exists('curl_file_create')) {
-		
-		$cFile 		= curl_file_create('./cert.pem');
-		$ckeyFile 	= curl_file_create('./certkey.key');
-		$xml 		= curl_file_create('./input.xml');
-	} 
-	else { 
-		$cFile 		= '@' . realpath('./cert.pem'');
-		$ckeyFile 	= '@' . realpath('./certkey.key');
-		$xml 		= '@' . realpath('./input.xml');
-	}
+//Transformando o arquivo em algo enviavel pelo CURL
+if (function_exists('curl_file_create')) {
 
-	//Opções e informações do CURL
-	curl_setopt($curl, CURLOPT_HEADER, false);
-	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($curl, CURLOPT_POST, true);
-	curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-	curl_setopt($curl, CURLOPT_POSTFIELDS, [
-		'cert'		=> $cFile,
-		'certkey'	=> $ckeyFile,
-		'xml'		=> $xml,
-	]);
+	$cFile 		= curl_file_create('./cert.pem');
+	$ckeyFile 	= curl_file_create('./certkey.key');
+	$xml 		= curl_file_create('./input.xml');
+} 
+else { 
+	$cFile 		= '@' . realpath('./cert.pem'');
+	$ckeyFile 	= '@' . realpath('./certkey.key');
+	$xml 		= '@' . realpath('./input.xml');
+}
 
-	$json_response = curl_exec($curl);
-	$json_response = json_decode($json_response, true);
+//Opções e informações do CURL
+curl_setopt($curl, CURLOPT_HEADER, false);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_POST, true);
+curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($curl, CURLOPT_POSTFIELDS, [
+	'cert'		=> $cFile,
+	'certkey'	=> $ckeyFile,
+	'xml'		=> $xml,
+]);
+
+$json_response = curl_exec($curl);
+$json_response = json_decode($json_response, true);
 ```
