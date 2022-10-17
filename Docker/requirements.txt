@@ -1,5 +1,7 @@
 flask
 flask_jsonpify
 flask_restful
-mysql-connector-python
 gunicorn
+lxml
+signxml
+urllib3
