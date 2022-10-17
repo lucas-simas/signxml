@@ -25,3 +25,39 @@ sudo docker build . -t lsignxml
 
 sudo docker run -d -p 6025:6025 --name=LSIGNXML --restart=always lsignxml
 ```
+
+## Como utilizar
+Por padrão este container será criado no localhost com a porta definida para 6025.
+Ele funciona como uma API que aceita POSTs
+Você deve enviar da seguinte forma, exemplo:
+```
+//Inicializando o CURL
+	$curl = curl_init('http://localhost:6025/xml/assinar');
+
+	//Transformando o arquivo em algo enviavel pelo CURL
+	if (function_exists('curl_file_create')) {
+		
+		$cFile 		= curl_file_create('./cert.pem');
+		$ckeyFile 	= curl_file_create('./certkey.key');
+		$xml 		= curl_file_create('./input.xml');
+	} 
+	else { 
+		$cFile 		= '@' . realpath('./cert.pem'');
+		$ckeyFile 	= '@' . realpath('./certkey.key');
+		$xml 		= '@' . realpath('./input.xml');
+	}
+
+	//Opções e informações do CURL
+	curl_setopt($curl, CURLOPT_HEADER, false);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($curl, CURLOPT_POST, true);
+	curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($curl, CURLOPT_POSTFIELDS, [
+		'cert'		=> $cFile,
+		'certkey'	=> $ckeyFile,
+		'xml'		=> $xml,
+	]);
+
+	$json_response = curl_exec($curl);
+	$json_response = json_decode($json_response, true);
+```
