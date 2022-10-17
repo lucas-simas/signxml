@@ -18,3 +18,8 @@ Removes the password (paraphrase) from the extracted private key (optional):
 
 openssl rsa -in key.pem -out server.key
 ```
+
+## Como buildar
+```
+docker build -t lsignxml -f Dockerfile .
+```
