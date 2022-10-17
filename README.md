@@ -31,7 +31,7 @@ Por padrão este container será criado no localhost com a porta definida para 6
 Ele funciona como uma API que aceita POSTs
 Você deve enviar da seguinte forma, exemplo:
 ```
-URL: http://localhost:6025/xml/assinar'
+URL: http://localhost:6025/xml/assinar
 
 PostData:
 cert - arquivo .pem (certificado)
