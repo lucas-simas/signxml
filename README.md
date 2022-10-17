@@ -5,8 +5,8 @@ Container Assinador de XML configurado para IPC-Brasil
 https://github.com/XML-Security/signxml
 
 ## Passo a passo para transformar certificado .pfx em .pem com chave .key :
+Trecho de: https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl
 ```
-[https://stackoverflow.com/questions/15413646/converting-pfx-to-pem-using-openssl]
 Second case: To convert a PFX file to separate public and private key PEM files:
 Extracts the private key form a PFX to a PEM file:
 
