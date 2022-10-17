@@ -1,6 +1,8 @@
 # signxml
 Container Assinador de XML configurado para IPC-Brasil
 
+## Libs utilizadas
+https://github.com/XML-Security/signxml
 
 ## Passo a passo para transformar certificado .pfx em .pem com chave .key :
 ```
