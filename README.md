@@ -21,5 +21,7 @@ openssl rsa -in key.pem -out server.key
 
 ## Como buildar
 ```
-docker build -t lsignxml -f Dockerfile .
+sudo docker build . -t lsignxml
+
+sudo docker run -d -p 6025:6025 --name=LSIGNXML --restart=always lsignxml
 ```
